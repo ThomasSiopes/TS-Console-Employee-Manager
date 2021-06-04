@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 const inquirer = require('inquirer');
-const { restoreDefaultPrompts } = require('inquirer');
+const cTable = require('console.table');
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -40,11 +40,9 @@ const start = () => {
 
 const viewEmployees = () => {
     console.clear();
-    connection.query('SELECT employee.id, first_name, last_name, title, salary, name FROM employee INNER JOIN role ON employee.role_id = role.id INNER JOIN department ON role.department_id = department.id;', (err,res) => {
+    connection.query('SELECT employee.id, first_name, last_name, name, title, salary FROM employee INNER JOIN role ON employee.role_id = role.id INNER JOIN department ON role.department_id = department.id;', (err,res) => {
         if(err) throw err;
-        res.forEach(({id, first_name, last_name, title, salary, name}) => {
-            console.log(`Employee #${id} | Name: ${first_name} ${last_name} | Department: ${name} | Role: ${title} | Salary: \$${salary}`);
-        });
+        console.table(res);
     });
     start();
 }
@@ -53,9 +51,7 @@ const viewDepartments = () => {
     console.clear();
     connection.query('SELECT * FROM department', (err,res) => {
         if(err) throw err;
-        res.forEach(({id, name}) => {
-            console.log(`Department #${id} | Name: ${name}`);
-        });
+        console.table(res);
     });
     start();
 }
@@ -64,9 +60,7 @@ const viewRoles = () => {
     console.clear();
     connection.query('SELECT role.id, title, salary, name FROM role INNER JOIN department ON role.department_id = department.id', (err,res) => {
         if(err) throw err;
-        res.forEach(({id, title, salary, name}) => {
-            console.log(`Role #${id} | Role: ${title} | Average Salary: ${salary} | Department: ${name}`);
-        });
+        console.table(res);
     });
     start();
 }
