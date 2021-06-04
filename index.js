@@ -44,7 +44,14 @@ const viewEmployees = () => {
         if(err) throw err;
         console.table(res);
     });
-    start();
+    inquirer.prompt([
+        {
+            name: 'forward',
+            type: 'list',
+            message: '',
+            choices: ["Back"]
+        }
+    ]).then(() => {start();})
 }
 
 const viewDepartments = () => {
@@ -53,7 +60,14 @@ const viewDepartments = () => {
         if(err) throw err;
         console.table(res);
     });
-    start();
+    inquirer.prompt([
+        {
+            name: 'forward',
+            type: 'list',
+            message: '',
+            choices: ["Back"]
+        }
+    ]).then(() => {start();})
 }
 
 const viewRoles = () => {
@@ -62,7 +76,14 @@ const viewRoles = () => {
         if(err) throw err;
         console.table(res);
     });
-    start();
+    inquirer.prompt([
+        {
+            name: 'forward',
+            type: 'list',
+            message: '',
+            choices: ["Back"]
+        }
+    ]).then(() => {start();})
 }
 
 const addEmployee = () => {
