@@ -42,11 +42,12 @@ const viewEmployees = () => {
     console.clear();
     connection.query('SELECT employee.id, first_name, last_name, name, title, salary FROM employee INNER JOIN role ON employee.role_id = role.id INNER JOIN department ON role.department_id = department.id;', (err,res) => {
         if(err) throw err;
+        console.log("");
         console.table(res);
     });
     inquirer.prompt([
         {
-            name: 'forward',
+            name: ' ',
             type: 'list',
             message: '',
             choices: ["Back"]
@@ -58,11 +59,12 @@ const viewDepartments = () => {
     console.clear();
     connection.query('SELECT * FROM department', (err,res) => {
         if(err) throw err;
+        console.log("");
         console.table(res);
     });
     inquirer.prompt([
         {
-            name: 'forward',
+            name: ' ',
             type: 'list',
             message: '',
             choices: ["Back"]
@@ -74,11 +76,12 @@ const viewRoles = () => {
     console.clear();
     connection.query('SELECT role.id, title, salary, name FROM role INNER JOIN department ON role.department_id = department.id', (err,res) => {
         if(err) throw err;
+        console.log("");
         console.table(res);
     });
     inquirer.prompt([
         {
-            name: 'forward',
+            name: ' ',
             type: 'list',
             message: '',
             choices: ["Back"]
